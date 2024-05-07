@@ -7,7 +7,8 @@ using namespace std;
 
 int main()
 {
-	ifstream file("C://Users/lng/OneDrive - UOU/바탕 화면/SF5 실습/20240507/hello.txt");
+	//ifstream file("C://Users/lng/OneDrive - UOU/바탕 화면/SF5 실습/20240507/hello.txt");
+	ifstream file("hello.txt");
 	string line;
 	vector <string> v;
 
@@ -18,7 +19,8 @@ int main()
 
 	file.close();
 
-	ofstream write_file("C://Users/lng/OneDrive - UOU/바탕 화면/SF5 실습/20240507/output.txt");
+	//ofstream write_file("C://Users/lng/OneDrive - UOU/바탕 화면/SF5 실습/20240507/output.txt");
+	ofstream write_file("output.txt");
 
 	if (write_file.fail()) cout << "파일 없음" << endl;
 
