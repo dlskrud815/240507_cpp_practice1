@@ -22,9 +22,10 @@ int main()
 
 	if (write_file.fail()) cout << "파일 없음" << endl;
 
-	for (int i = v.size() - 1 ; i >= 0; i--)
+	while (!v.empty())
 	{
-		write_file << v[i] << endl;
+		write_file << v.back() << endl;
+		v.pop_back();
 	}
 
 	write_file.close();
