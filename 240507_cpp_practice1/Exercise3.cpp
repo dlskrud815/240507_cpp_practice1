@@ -18,7 +18,7 @@ int main()
 
 	cout << "몇 명의 회원? ";
 	cin >> num;
-	cout << num << "명의 회원에 대한 이름 비밀번호를 순차적으로 입력하세요." << endl;
+	cout << endl << num << "명의 회원에 대한 이름 비밀번호를 순차적으로 입력하세요." << endl;
 
 	vector <memberInfo> info(num);
 
@@ -38,7 +38,7 @@ int main()
 
 	write_file.close();
 
-	cout << "------------- 회원 명부 파일 읽기 -------------" << endl;
+	cout << endl << "------------- 회원 명부 파일 읽기 -------------" << endl;
 
 	ifstream read_file("member_output.txt");
 	string line;
