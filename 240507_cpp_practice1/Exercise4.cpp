@@ -6,6 +6,8 @@
 
 using namespace std;
 
+int ConfirmPW(string input);
+
 int main()
 {
 	string line, name, pw, name_input, pw_input;
@@ -29,6 +31,13 @@ int main()
 
 		cout << "비번을 입력하세요: ";
 		cin >> pw_input;
+
+		while (ConfirmPW(pw_input) > 0)
+		{
+			cout << endl << "[재입력]" << endl
+				<< "비번을 입력하세요: ";
+			cin >> pw_input;
+		}
 
 		ifstream member_file("member.txt");
 
@@ -60,6 +69,27 @@ int main()
 		else
 		{
 			cout << endl << "로그인 실패" << endl;
+
+			if (nameCheck == false)
+			{
+				cout << endl << "- 존재하지 않는 사용자 이름입니다:)" << endl;
+			}
+			else if (pwCheck == false)
+			{
+				cout << endl << "- 비밀번호가 일치하지 않습니다:)" << endl;
+			}
 		}
 	}
+}
+
+int ConfirmPW(string input)
+{
+	if (input.size() < 6 || input.size() > 17)
+	{
+		cout << endl << "- 비밀번호는 6~17 자리입니다:)" << endl;
+		return 1;
+	}
+	// 다른 조건들 2,3,4 리턴값으로 주면 될 듯
+
+	return 0;
 }
