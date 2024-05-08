@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -6,23 +6,43 @@
 using namespace std;
 
 struct memberInfo {
-	string name;
-	string pw;
+	string name, pw;
 };
 
-void CheckInput(vector<memberInfo>& info, int i)
+void CheckInput(string idPw, vector<memberInfo>& info, int i)
 {
-	int type = 0; // Á¤»ó
+	int type = 0, cnt, j;
+	vector <string> idPwInfo(2);
 
 	while (true) {
-		// cinÀ¸·Î ¹ŞÀ¸¸é 1¹ø ¿À·ù¿¡ ´çÂøÇÒ °æ¿ì°¡ ¾ø´Éµğ??
-		if (info[i].name.empty() || info[i].pw.empty())
+
+		cnt = 0,  j = 0;
+
+		for (int i = 0; i < idPw.size(); i++)
 		{
-			type = 1; // ÀÔ·Â ¾ç½Ä
+			idPwInfo[j] += idPw[i];
+
+			if (idPw[i] == ' ')
+			{
+				cnt++;
+				j++;
+			}
+		}
+
+		if (cnt == 1)
+		{
+			info[i].name = idPwInfo[0];
+			info[i].pw = idPwInfo[1];
+		}
+
+		// cinìœ¼ë¡œ ë°›ìœ¼ë©´ 1ë²ˆ ì˜¤ë¥˜ì— ë‹¹ì°©í•  ê²½ìš°ê°€ ì—†ëŠ¥ë””??
+		if (cnt > 1 || cnt < 1)
+		{
+			type = 1; // ì…ë ¥ ì–‘ì‹
 		}
 		else if (info[i].pw.size() < 6 || info[i].pw.size() > 18)
 		{
-			type = 2; // ºñ¹Ğ¹øÈ£ ¾ç½Ä
+			type = 2; // ë¹„ë°€ë²ˆí˜¸ ì–‘ì‹
 		}
 		else {
 			break;
@@ -31,15 +51,16 @@ void CheckInput(vector<memberInfo>& info, int i)
 		switch (type)
 		{
 		case 1:
-			cout << "* {»ç¿ëÀÚÀÌ¸§} {ºñ¹Ğ¹øÈ£}°ú °°Àº ¾ç½ÄÀ¸·Î ÀÔ·ÂÇØÁÖ¼¼¿ä." << endl;
+			cout << "* {ì‚¬ìš©ìì´ë¦„} {ë¹„ë°€ë²ˆí˜¸}ê³¼ ê°™ì€ ì–‘ì‹ìœ¼ë¡œ ì…ë ¥í•´ì£¼ì„¸ìš”." << endl;
 			break;
 		case 2:
-			cout << "* ºñ¹Ğ¹øÈ£´Â 6ÀÚ¸® ÀÌ»ó ~ 18ÀÚ¸® ¹Ì¸¸À¸·Î ÀÔ·ÂÇØÁÖ¼¼¿ä." << endl;
+			cout << "* ë¹„ë°€ë²ˆí˜¸ëŠ” 6ìë¦¬ ì´ìƒ ~ 18ìë¦¬ ë¯¸ë§Œìœ¼ë¡œ ì…ë ¥í•´ì£¼ì„¸ìš”." << endl;
 			break;
 		}
 
-		cout << i + 1 << "¹øÂ° È¸¿ø: ";
-		cin >> info[i].name >> info[i].pw;
+		cout << i + 1 << "ë²ˆì§¸ íšŒì›: ";
+		cin >> idPw;
+		//cin >> info[i].name >> info[i].pw;
 	}
 }
 
@@ -47,23 +68,24 @@ void CheckInput(vector<memberInfo>& info, int i)
 int main()
 {
 	int num;
+	string idPw;
 
-	cout << "¸î ¸íÀÇ È¸¿ø? ";
+	cout << "ëª‡ ëª…ì˜ íšŒì›? ";
 	cin >> num;
-	cout << endl << num << "¸íÀÇ È¸¿ø¿¡ ´ëÇÑ ÀÌ¸§ ºñ¹Ğ¹øÈ£¸¦ ¼øÂ÷ÀûÀ¸·Î ÀÔ·ÂÇÏ¼¼¿ä." << endl;
+	cout << endl << num << "ëª…ì˜ íšŒì›ì— ëŒ€í•œ ì´ë¦„ ë¹„ë°€ë²ˆí˜¸ë¥¼ ìˆœì°¨ì ìœ¼ë¡œ ì…ë ¥í•˜ì„¸ìš”." << endl;
 
 	vector <memberInfo> info(num);
 
 	for (int i = 0; i < num; i++)
 	{
-		cout << i+1 << "¹øÂ° È¸¿ø: ";
-		cin >> info[i].name >> info[i].pw;
+		cout << i+1 << "ë²ˆì§¸ íšŒì›: ";
+		cin >> idPw;
 
-		CheckInput(info, i);
+		CheckInput(idPw, info, i);
 	}
 
 	ofstream write_file("member_output.txt");
-	if (write_file.fail()) cout << "ÆÄÀÏ ¾øÀ½" << endl;
+	if (write_file.fail()) cout << "íŒŒì¼ ì—†ìŒ" << endl;
 
 	for (int i = 0; i < num; i++)
 	{
@@ -72,7 +94,7 @@ int main()
 
 	write_file.close();
 
-	cout << endl << "------------- È¸¿ø ¸íºÎ ÆÄÀÏ ÀĞ±â -------------" << endl;
+	cout << endl << "------------- íšŒì› ëª…ë¶€ íŒŒì¼ ì½ê¸° -------------" << endl;
 
 	ifstream read_file("member_output.txt");
 	string line;

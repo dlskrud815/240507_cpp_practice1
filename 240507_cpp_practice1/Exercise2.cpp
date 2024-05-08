@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -7,8 +7,8 @@ using namespace std;
 
 bool CheckInput() 
 {
-	//±æÀÌ°¡ °°ÀºÁö?
-	//ÇÏ³ªÇÏ³ª 
+	//ê¸¸ì´ê°€ ê°™ì€ì§€?
+	//í•˜ë‚˜í•˜ë‚˜ 
 	return true;
 }
 
@@ -19,7 +19,7 @@ int main()
 	vector <string> v1, v2;
 	int num, lineCount = 0;
 
-	cout << "1. µ¥ÀÌÅÍ Ãâ·Â" << endl;
+	cout << "1. ë°ì´í„° ì¶œë ¥" << endl;
 	while (getline(file, line))
 	{
 		v1.push_back(line);
@@ -29,19 +29,24 @@ int main()
 
 	file.close();
 
-	cout << "2. »ç¿ëÀÚ ÀÔ·Â" << endl
-		<< ": ÁÙ ¼ø¼­¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä ex) 231" << endl;
-	//°ø¹é È®ÀÎ 9ÁÙ±îÁö ¹®ÀÚ È®ÀÎ
+	cout << "2. ì‚¬ìš©ì ì…ë ¥" << endl
+		<< ": ì¤„ ìˆœì„œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” ex) 231" << endl;
+	//ê³µë°± í™•ì¸ 9ì¤„ê¹Œì§€ ë¬¸ì í™•ì¸
 	cin >> input;
+	
+	/*
 	
 	while (!CheckInput)
 	{
-		cout << "[ÀçÀÔ·Â]" << endl;
+		cout << "[ì¬ì…ë ¥]" << endl;
 		cin >> input;
 	}
 
+	*/
+
+
 	ofstream write_file("bonus_output.txt");
-	if (write_file.fail()) cout << "ÆÄÀÏ ¾øÀ½" << endl;
+	if (write_file.fail()) cout << "íŒŒì¼ ì—†ìŒ" << endl;
 
 
 	for (int i = 0; i < input.size(); i++)
