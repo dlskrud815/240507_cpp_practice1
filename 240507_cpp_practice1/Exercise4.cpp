@@ -9,44 +9,57 @@ using namespace std;
 int main()
 {
 	string line, name, pw, name_input, pw_input;
-	bool nameCheck = false, pwCheck = false;
+	bool nameCheck, pwCheck;
 
-	cout << "이름을 입력하세요: ";
-	cin >> name_input;
-	cout << "비번을 입력하세요: ";
-	cin >> pw_input;
+	cout << "* 회원 명부를 응용한 로그인 기능 *" << endl
+		<< "( quit 입력 시 종료 )" << endl;
 
-	ifstream member_file("member.txt");
-	
-	while (getline(member_file, line))
+	while (1)
 	{
-		stringstream ss(line);
-		ss >> name >> pw;
+		nameCheck = false;
+		pwCheck = false;
 
-		//cout << "확인용: " << name << " " << pw << endl;
+		cout << endl << "이름을 입력하세요: ";
+		cin >> name_input;
 
-		if (name_input == name)
+		if (name_input == "quit")
 		{
-			nameCheck = true;
+			return 0;
+		}
 
-			if (pw_input == pw)
+		cout << "비번을 입력하세요: ";
+		cin >> pw_input;
+
+		ifstream member_file("member.txt");
+
+		while (getline(member_file, line))
+		{
+			stringstream ss(line);
+			ss >> name >> pw;
+
+			//cout << "확인용: " << name << " " << pw << endl;
+
+			if (name_input == name)
 			{
-				pwCheck = true;
-				break;
+				nameCheck = true;
+
+				if (pw_input == pw)
+				{
+					pwCheck = true;
+					break;
+				}
 			}
 		}
-	}
 
-	member_file.close();
+		member_file.close();
 
-	if (nameCheck == true && pwCheck == true)
-	{
-		cout << endl << "로그인 성공" << endl;
+		if (nameCheck == true && pwCheck == true)
+		{
+			cout << endl << "로그인 성공" << endl;
+		}
+		else
+		{
+			cout << endl << "로그인 실패" << endl;
+		}
 	}
-	else
-	{
-		cout << endl << "로그인 실패" << endl;
-	}
-
-	return 0;
 }
