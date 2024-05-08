@@ -13,9 +13,19 @@ int main()
 {
 	string line, name, pw, name_input, pw_input;
 	bool nameCheck, pwCheck;
+	vector <string> memberVector;
 
 	cout << "* 회원 명부를 응용한 로그인 기능 *" << endl
 		<< "( quit 입력 시 종료 )" << endl;
+
+	ifstream member_file("member.txt");
+
+	while (getline(member_file, line))
+	{
+		memberVector.push_back(line);
+	}
+
+	member_file.close();
 
 	while (1)
 	{
@@ -40,9 +50,8 @@ int main()
 			cin >> pw_input;
 		}
 
-		ifstream member_file("member.txt");
 
-		while (getline(member_file, line))
+		for (string line : memberVector)
 		{
 			stringstream ss(line);
 			ss >> name >> pw;
@@ -60,8 +69,6 @@ int main()
 				}
 			}
 		}
-
-		member_file.close();
 
 		NoticeLogin(nameCheck, pwCheck);
 	}
