@@ -7,6 +7,7 @@
 using namespace std;
 
 int ConfirmPW(string input);
+void NoticeLogin(bool nameCheck, bool pwCheck);
 
 int main()
 {
@@ -62,23 +63,7 @@ int main()
 
 		member_file.close();
 
-		if (nameCheck == true && pwCheck == true)
-		{
-			cout << endl << "로그인 성공" << endl;
-		}
-		else
-		{
-			cout << endl << "로그인 실패" << endl;
-
-			if (nameCheck == false)
-			{
-				cout << endl << "- 존재하지 않는 사용자 이름입니다:)" << endl;
-			}
-			else if (pwCheck == false)
-			{
-				cout << endl << "- 비밀번호가 일치하지 않습니다:)" << endl;
-			}
-		}
+		NoticeLogin(nameCheck, pwCheck);
 	}
 }
 
@@ -92,4 +77,25 @@ int ConfirmPW(string input)
 	// 다른 조건들 2,3,4 리턴값으로 주면 될 듯
 
 	return 0;
+}
+
+void NoticeLogin(bool nameCheck, bool pwCheck)
+{
+	if (nameCheck == true && pwCheck == true)
+	{
+		cout << endl << "로그인 성공" << endl;
+	}
+	else
+	{
+		cout << endl << "로그인 실패" << endl;
+
+		if (nameCheck == false)
+		{
+			cout << endl << "- 존재하지 않는 사용자 이름입니다:)" << endl;
+		}
+		else if (pwCheck == false)
+		{
+			cout << endl << "- 비밀번호가 일치하지 않습니다:)" << endl;
+		}
+	}
 }
